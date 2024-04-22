@@ -2,7 +2,7 @@ resource "aws_ec2_transit_gateway" "this" {
   amazon_side_asn                 = 64512
   auto_accept_shared_attachments  = "disable"
   default_route_table_association = "enable"
-  default_route_table_propagation = "enable"
+  default_route_table_propagation = "enable" #use STATIC, no strange routes will appear out of the blue
   description                     = null
   dns_support                     = "enable"
   multicast_support               = "disable"
