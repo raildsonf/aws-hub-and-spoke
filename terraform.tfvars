@@ -16,17 +16,18 @@ vpn_ecmp_support                = "enable"
 dns_support                     = "enable"
 
 #VPN
-aws_customer_gateway_name      = "shared-customer-gateway"
-aws_vpn_connection_name        = "shared-vpn-connection"
-on_prem_destination_cidr_block = "10.252.0.0/16"
-static_routes_only             = false
-vpn_connection_type            = "ipsec.1"
-customer_gateway_ip            = "189.9.32.2"
-customer_gateway_type          = "ipsec.1"
+aws_customer_gateway_name       = "shared-customer-gateway"
+aws_vpn_connection_name         = "shared-vpn-connection"
+on_prem_destination_cidr_blocks = ["10.0.0.0/8", "172.26.0.0/16", "172.17.0.0/16"]
+static_routes_only              = true
+vpn_connection_type             = "ipsec.1"
+customer_gateway_ip             = "189.9.32.2"
+customer_gateway_type           = "ipsec.1"
 
 #Logs
-log_enabled           = true
-log_retention_in_days = 30
+aws_cloudwatch_log_group_name = "/mte/network/site-to-site-vpn"
+log_enabled                   = true
+log_retention_in_days         = 30
 
 ######################################
 ## Common TAGS

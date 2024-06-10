@@ -80,10 +80,12 @@ variable "aws_vpn_connection_name" {
   type        = string
   description = "value"
 }
-variable "on_prem_destination_cidr_block" {
-  type        = string
-  description = "value"
+
+variable "on_prem_destination_cidr_blocks" {
+  type        = list(string)
+  description = "List of on-premise destination CIDR blocks"
 }
+
 variable "customer_gateway_ip" {
   type        = string
   description = "value"
@@ -97,6 +99,10 @@ variable "customer_gateway_type" {
 variable "common_tags" {
   type        = map(string)
   description = "Common tags for resources"
+}
+
+variable "aws_cloudwatch_log_group_name" {
+  type = string
 }
 
 variable "log_enabled" {

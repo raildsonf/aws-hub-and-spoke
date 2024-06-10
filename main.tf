@@ -100,7 +100,7 @@ resource "aws_vpn_connection" "vpn_connection" {
 }
 
 resource "aws_cloudwatch_log_group" "vpn" {
-  name              = "mte-site-to-site-vpn"
+  name              = var.aws_cloudwatch_log_group_name
   retention_in_days = var.log_retention_in_days
   tags              = var.common_tags
 }
@@ -108,8 +108,9 @@ resource "aws_cloudwatch_log_group" "vpn" {
 ###########################################
 #### Add routes here!!
 ###########################################
-resource "aws_ec2_transit_gateway_route" "vpn_static_route" {
-  destination_cidr_block         = var.on_prem_destination_cidr_block
+resource "aws_ec2_transit_gateway_route" "on_prem_routes" {
+  count                          = length(var.on_prem_destination_cidr_blocks)
+  destination_cidr_block         = var.on_prem_destination_cidr_blocks[count.index]
   transit_gateway_route_table_id = aws_ec2_transit_gateway.transit_gateway.association_default_route_table_id
   transit_gateway_attachment_id  = aws_vpn_connection.vpn_connection.transit_gateway_attachment_id
   blackhole                      = false
